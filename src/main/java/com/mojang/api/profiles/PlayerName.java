@@ -21,7 +21,7 @@ package com.mojang.api.profiles;
 public class PlayerName
 {
     private String name;
-    private Integer changedToAt;
+    private long changedToAt;
 
     public String getName() {
         return name;
@@ -31,11 +31,11 @@ public class PlayerName
         this.name = name;
     }
 
-    public Integer getChangedToAt() {
+    public long getChangedToAt() {
         return changedToAt;
     }
 
-    public void setChangedToAt(Integer changedToAt) {
+    public void setChangedToAt(long changedToAt) {
         this.changedToAt = changedToAt;
     }
 }
