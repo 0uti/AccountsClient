@@ -34,10 +34,10 @@ public class HttpProfileRepository implements ProfileRepository {
 
     @Override
     public Profile[] findProfilesByNames(String... names) {
-        List<Profile> profiles = new ArrayList<Profile>();
+        List<Profile> profiles = new ArrayList<>();
         try {
 
-            List<HttpHeader> headers = new ArrayList<HttpHeader>();
+            List<HttpHeader> headers = new ArrayList<>();
             headers.add(new HttpHeader("Content-Type", "application/json"));
 
             int namesCount = names.length;
