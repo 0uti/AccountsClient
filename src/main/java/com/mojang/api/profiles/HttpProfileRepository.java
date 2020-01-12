@@ -1,6 +1,7 @@
 package com.mojang.api.profiles;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.$Gson$Preconditions;
 import com.mojang.api.http.BasicHttpClient;
 import com.mojang.api.http.HttpBody;
 import com.mojang.api.http.HttpClient;
@@ -33,10 +34,19 @@ public class HttpProfileRepository implements ProfileRepository {
     }
 
     @Override
-    public Profile[] findProfilesByNames(String... names) {
-        List<Profile> profiles = new ArrayList<>();
-        try {
+    public Profile findProfileByName(String name)
+    {
+        Profile[] profiles = findProfilesByNames(name);
+        if (profiles.length == 0) return null;
+        return profiles[0];
+    }
 
+    @Override
+    public Profile[] findProfilesByNames(String... names)
+    {
+        List<Profile> profiles = new ArrayList<>();
+        try
+        {
             List<HttpHeader> headers = new ArrayList<>();
             headers.add(new HttpHeader("Content-Type", "application/json"));
 
@@ -71,6 +81,11 @@ public class HttpProfileRepository implements ProfileRepository {
     private Profile[] post(URL url, HttpBody body, List<HttpHeader> headers) throws IOException {
         String response = client.post(url, body, headers);
         return gson.fromJson(response, Profile[].class);
+    }
+
+    private Profile post2(URL url, HttpBody body, List<HttpHeader> headers) throws IOException {
+        String response = client.post(url, body, headers);
+        return gson.fromJson(response, Profile.class);
     }
 
     private static HttpBody getHttpBody(String... namesBatch) {

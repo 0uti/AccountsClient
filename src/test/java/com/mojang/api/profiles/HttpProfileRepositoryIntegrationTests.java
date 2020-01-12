@@ -1,5 +1,6 @@
 package com.mojang.api.profiles;
 
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -20,6 +21,19 @@ public class HttpProfileRepositoryIntegrationTests {
         assertThat(profiles.length, is(1));
         assertThat(profiles[0].getName(), is(equalTo("mollstam")));
         assertThat(profiles[0].getId(), is(equalTo("f8cdb6839e9043eea81939f85d9c5d69")));
+        assertThat(profiles[0].getUUID().toString(), is(equalTo("f8cdb683-9e90-43ee-a819-39f85d9c5d69")));
+    }
+
+    @Test
+    public void findProfileByName_existingNameProvided_returnsProfile() throws Exception {
+        ProfileRepository repository = new HttpProfileRepository("minecraft");
+
+        Profile profiles = repository.findProfileByName("mollstam");
+
+        assertThat(profiles, is(IsNull.notNullValue()));
+        assertThat(profiles.getName(), is(equalTo("mollstam")));
+        assertThat(profiles.getId(), is(equalTo("f8cdb6839e9043eea81939f85d9c5d69")));
+        assertThat(profiles.getUUID().toString(), is(equalTo("f8cdb683-9e90-43ee-a819-39f85d9c5d69")));
     }
 
     @Test
