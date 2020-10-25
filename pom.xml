@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mojang</groupId>
 	<artifactId>accounts-client</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.3a</version>
 	<name>AccountsClient</name>
 	<url>http://github.com/Outi/AccountsClient</url>
 	<build>
